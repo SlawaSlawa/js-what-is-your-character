@@ -1,58 +1,58 @@
-'use strict';
 
 const content = document.querySelector('.content');
+let counterQuestion = 0;
+let counterAnswers = 0;
+let numberOfTest = 0;
 
 function init() {
-    renderCard();
+    renderCard(dbArray);
     startListener();
 }
 
-function renderCard() {
-	console.log('renderCard');
+// function renderTitle() {
+// 	const title = document.querySelector('.title');
+// }
+
+function renderCard(data) {
+	const {id, title, questions, answers} = data[numberOfTest];
+
+	const answerList = document.createElement('ul');
+	answerList.classList.add('answer-list');
+
+	answers[counterAnswers].forEach( item => {
+	            			answerList.insertAdjacentHTML('beforeend', `
+	            				<li class="answer-list__item">
+				                    <span class="answer-list__marker">
+				                        а)
+				                    </span>
+									${item}            						
+                				</li>`
+                			);
+	            		});
+
+	const card = document.createElement('div');
+	card.classList.add('question');
+
+	card.insertAdjacentHTML('beforeend', `
+				<span class="question__number">${counterQuestion + 1}.</span> 
+                ${questions[counterQuestion]}`);
+
     content.textContent = '';
 
-    const card = `
-		<div class="question">
-                <span class="question__number">1.</span> Часто ли вы задумываетесь над тем, какое влияние оказывают ваши поступки на окружающих:
-            </div>
-            <!-- /.question -->
-            <ul class="answer-list">
-                <li class="answer-list__item">
-                    <span class="answer-list__marker">
-                        а)
-                    </span> очень редко;
-                </li>
-                <li class="answer-list__item">
-                    <span class="answer-list__marker">
-                        б)
-                    </span> редко;
-                </li>
-                <li class="answer-list__item">
-                    <span class="answer-list__marker">
-                        в)
-                    </span> достаточно часто;
-                </li>
-                <li class="answer-list__item">
-                    <span class="answer-list__marker">
-                        г)
-                    </span> очень часто?
-                </li>
-            </ul>
-        <!-- /.answer-list -->
-        <button class="btn-submit">
-            Принять
-        </button>
-        <div class="result">
-        </div>
-        <!-- /.result -->
-	`;
-
-    content.insertAdjacentHTML('afterbegin', card);
+    content.insertAdjacentElement('afterbegin', card);
+    const answersElement = document.querySelector('.content');
+	answersElement.insertAdjacentElement('beforeend', answerList);
+	answersElement.insertAdjacentHTML('beforeend', `
+			<button class="btn-submit">
+	            Принять
+	        </button>
+	        <div class="result">
+	        </div>
+		`);
 }
 
 function startListener() {
 	const answerListItems = document.querySelectorAll('.answer-list__item');
-	console.log('startListener');
     answerListItems.forEach(item => {
         item.addEventListener('click', event => {
             const target = event.target;
