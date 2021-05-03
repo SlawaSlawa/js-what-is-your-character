@@ -84,8 +84,6 @@ function handlerBtnClick(choice, questionNum) {
             break;
     }
 
-    console.log(scores);
-
     if ((counterQuestion) <= (dbArray[numberOfTest].questions.length - 2)) {
     	counterQuestion++;
     	counterAnswers++;
@@ -96,8 +94,7 @@ function handlerBtnClick(choice, questionNum) {
 }
 
 function getResult(scores) {
-	alert('Great!!!');
-	console.log(scores);
+	console.log(dbArray[numberOfTest].results);
 }
 
 function startListener() {
