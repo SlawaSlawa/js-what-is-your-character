@@ -56,38 +56,46 @@ function renderCard(data) {
         choice = choice.getAttribute('data-target').trim();
         handlerBtnClick(choice, counterQuestion);
     });
-
 }
 
 function handlerBtnClick(choice, questionNum) {
-    console.log(choice, questionNum);
+
     switch (choice) {
-        case 'a':
-        scores += keysForCharacterTest[0];
+        case 'а':
+        scores += keysForCharacterTest[questionNum][0];
             break;
         case 'б':
-        scores += keysForCharacterTest[1];
+        scores += keysForCharacterTest[questionNum][1];
             break;
         case 'в':
-        scores += keysForCharacterTest[2];
+        scores += keysForCharacterTest[questionNum][2];
             break;
         case 'г':
-        scores += keysForCharacterTest[3];
+        scores += keysForCharacterTest[questionNum][3];
             break;
         case 'д':
-        scores += keysForCharacterTest[4];
+        scores += keysForCharacterTest[questionNum][4];
             break;
         case 'е':
-        scores += keysForCharacterTest[5];
+        scores += keysForCharacterTest[questionNum][5];
             break;
         case 'ж':
-        scores += keysForCharacterTest[6];
+        scores += keysForCharacterTest[questionNum][6];
             break;
-
     }
-    counterQuestion++;
-    counterAnswers++;
+
+    if ((counterQuestion) <= (dbArray[numberOfTest].questions.length - 2)) {
+    	counterQuestion++;
+    	counterAnswers++;
+    }else {
+    	getResult(scores);
+    }
     init();
+}
+
+function getResult(scores) {
+	alert('Great!!!');
+	console.log(scores);
 }
 
 function startListener() {
