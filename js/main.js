@@ -84,6 +84,8 @@ function handlerBtnClick(choice, questionNum) {
             break;
     }
 
+    console.log(scores);
+
     if ((counterQuestion) <= (dbArray[numberOfTest].questions.length - 2)) {
     	counterQuestion++;
     	counterAnswers++;
