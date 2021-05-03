@@ -62,25 +62,25 @@ function handlerBtnClick(choice, questionNum) {
 
     switch (choice) {
         case 'а':
-        scores += keysForCharacterTest[questionNum][0];
+        scores += dbArray[numberOfTest].keysForCharacterTest[questionNum][0];
             break;
         case 'б':
-        scores += keysForCharacterTest[questionNum][1];
+        scores += dbArray[numberOfTest].keysForCharacterTest[questionNum][1];
             break;
         case 'в':
-        scores += keysForCharacterTest[questionNum][2];
+        scores += dbArray[numberOfTest].keysForCharacterTest[questionNum][2];
             break;
         case 'г':
-        scores += keysForCharacterTest[questionNum][3];
+        scores += dbArray[numberOfTest].keysForCharacterTest[questionNum][3];
             break;
         case 'д':
-        scores += keysForCharacterTest[questionNum][4];
+        scores += dbArray[numberOfTest].keysForCharacterTest[questionNum][4];
             break;
         case 'е':
-        scores += keysForCharacterTest[questionNum][5];
+        scores += dbArray[numberOfTest].keysForCharacterTest[questionNum][5];
             break;
         case 'ж':
-        scores += keysForCharacterTest[questionNum][6];
+        scores += dbArray[numberOfTest].keysForCharacterTest[questionNum][6];
             break;
     }
 
@@ -113,7 +113,6 @@ function startListener() {
             const choice = target.querySelector('.answer-list__marker');
             target.classList.add('answer-list__item--active');
             target.setAttribute('data-target', choice.textContent);
-            // console.log(target);
         });
     });
 }
