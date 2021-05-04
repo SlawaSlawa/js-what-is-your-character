@@ -41,6 +41,11 @@
 	margin-bottom: 20px;
 }
 
+.result {
+	font-size: 18px;
+	margin-bottom: 20px;
+}
+
 .answer-list__item {
 	cursor: pointer;
 	padding: 10px;
