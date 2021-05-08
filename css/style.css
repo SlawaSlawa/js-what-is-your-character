@@ -66,6 +66,7 @@
 
 .btn-submit {
 	display: block;
+	cursor: pointer;
 	font-weight: bold;
 	border-radius: 30px;
 	background-color: palegoldenrod;	

@@ -8,13 +8,25 @@ function init() {
     if (counterQuestion === 0 && counterAnswers === 0) {
         scores = 0;        
     }
+    renderTitle();
     renderCard(dbArray);
+    toggleBtn();
     startListener();
 }
 
-// function renderTitle() {
-//  const title = document.querySelector('.title');
-// }
+function renderTitle() {
+ const title = document.querySelector('.title');
+ title.textContent = dbArray[numberOfTest].title;
+}
+
+function toggleBtn() {
+    const button = document.querySelector('.btn-submit');
+    if (button.disabled) {
+        button.disabled = false;
+    }else {
+        button.disabled = true;
+    }
+}
 
 function renderCard(data) {
     const { id, title, questions, answers } = data[numberOfTest];
@@ -58,12 +70,16 @@ function renderCard(data) {
         choice = choice.getAttribute('data-target').trim();
         handlerBtnClick(choice, counterQuestion);
     }
+
     if ((counterQuestion) == (dbArray[numberOfTest].questions.length)) {
         btnSubmit.removeEventListener('click', handlerBtnSubmit);
+        getResult(scores);
     }
 }
 
 function handlerBtnClick(choice, questionNum) {
+    const btnSubmit = document.querySelector('.btn-submit');
+
     switch (choice) {
         case 'а':
             scores += dbArray[numberOfTest].keysForCharacterTest[questionNum][0];
@@ -88,9 +104,10 @@ function handlerBtnClick(choice, questionNum) {
             break;
     }
 
-    if ((counterQuestion) <= (dbArray[numberOfTest].questions.length - 2)) {
+    if ((counterQuestion) < (dbArray[numberOfTest].questions.length - 1)) {
         counterQuestion++;
         counterAnswers++;
+        toggleBtn();
         init();
     } else {
         getResult(scores);
@@ -102,7 +119,7 @@ function getResult(scores) {
     const question = document.querySelector('.question');
     const answerList = document.querySelector('.answer-list');
     const btnSubmit = document.querySelector('.btn-submit');
-
+    btnSubmit.disabled = false;
     const resultTextBlock = document.createElement('p');
     resultTextBlock.classList.add('result');
     question.textContent = 'Ваш результат:';
@@ -126,13 +143,21 @@ function getResult(scores) {
     btnSubmit.textContent = 'Начать заново';
     scores = 0;
 
-    btnSubmit.addEventListener('click', () => {
+    counterQuestion = 0;
+    counterAnswers = 0;
+    numberOfTest = 0;
+    scores = 0;
+
+    btnSubmit.addEventListener('click', resetTest);
+
+    function resetTest() {
         counterQuestion = 0;
         counterAnswers = 0;
         numberOfTest = 0;
         scores = 0;
+        btnSubmit.removeEventListener('click', resetTest);
         init();
-    });
+    }
 }
 
 function startListener() {
@@ -140,6 +165,7 @@ function startListener() {
     answerListItems.forEach(item => {
         item.addEventListener('click', event => {
             const target = event.target;
+            toggleBtn();
 
             answerListItems.forEach(item => {
                 item.classList.remove('answer-list__item--active');
