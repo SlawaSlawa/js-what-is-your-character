@@ -1,4 +1,5 @@
 const content = document.querySelector('.content');
+const app = document.querySelector('.app');
 let counterQuestion = 0;
 let counterAnswers = 0;
 let numberOfTest = 0;
@@ -12,6 +13,11 @@ function init() {
     renderCard(dbArray);
     toggleBtn();
     startListener();
+}
+
+function changeBgColor() {
+    const colorIndex = Math.floor(Math.random() * bgColors.length);
+    app.style.backgroundColor = bgColors[colorIndex];
 }
 
 function renderTitle() {
@@ -30,6 +36,7 @@ function toggleBtn() {
 
 function renderCard(data) {
     const { id, title, questions, answers } = data[numberOfTest];
+    changeBgColor();
 
     const answerList = document.createElement('ul');
     answerList.classList.add('answer-list');

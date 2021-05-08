@@ -77,3 +77,4 @@ const dbArray = [{
 }];
 
 const alphabet = ['а', 'б', 'в', 'г', 'д', 'е', 'ж'];
+const bgColors = ['antiquewhite', 'beige', 'bisque', 'burlywood', '#efe8e8', 'cornflowerblue', 'darkseagreen'];
